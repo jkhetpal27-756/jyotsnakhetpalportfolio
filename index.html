@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jyotsna Khetpal | SAM Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #000000;
+  --black2: #0d0d0d;
+  --black3: #141414;
+  --gold: #f0c040;
+  --gold2: #ffd700;
+  --cyan: #00e5ff;
+  --white: #ffffff;
+  --white2: rgba(255,255,255,0.82);
+  --white3: rgba(255,255,255,0.4);
+  --white4: rgba(255,255,255,0.08);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Outfit',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; }
+
+/* NOISE OVERLAY */
+body::before {
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; width:100%; z-index:999;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.4rem 5rem;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(240,192,64,0.15);
+}
+.nav-logo {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem; font-weight:700;
+  color:var(--gold);
+  letter-spacing:2px;
+}
+.nav-links { display:flex; gap:2.5rem; list-style:none; }
+.nav-links a {
+  color:var(--white3); text-decoration:none;
+  font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;
+  transition:color 0.3s;
+}
+.nav-links a:hover { color:var(--gold); }
+
+/* HERO */
+.hero {
+  min-height:100vh; display:flex; align-items:center;
+  padding:0 5rem; position:relative; overflow:hidden;
+}
+.hero-bg-grid {
+  position:absolute; inset:0; z-index:0;
+  background-image:
+    linear-gradient(rgba(240,192,64,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,192,64,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-glow {
+  position:absolute; top:-200px; right:-100px;
+  width:700px; height:700px; border-radius:50%;
+  background:radial-gradient(circle, rgba(240,192,64,0.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-glow2 {
+  position:absolute; bottom:-200px; left:10%;
+  width:500px; height:500px; border-radius:50%;
+  background:radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-content { position:relative; z-index:1; max-width:750px; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:0.6rem;
+  border:1px solid rgba(0,229,255,0.3);
+  background:rgba(0,229,255,0.06);
+  color:var(--cyan); font-size:0.72rem;
+  letter-spacing:2.5px; text-transform:uppercase;
+  padding:0.55rem 1.3rem; border-radius:2px;
+  margin-bottom:2.2rem;
+  animation:fadeUp 0.7s ease forwards; opacity:0;
+}
+.badge-dot { width:6px; height:6px; background:var(--cyan); border-radius:50%; animation:blink 1.8s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,7vw,6.5rem);
+  font-weight:700; line-height:1.0;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.7s 0.15s ease forwards; opacity:0;
+}
+.hero h1 .name-gold { color:var(--gold); display:block; }
+.hero-title {
+  font-size:1rem; color:var(--white3);
+  letter-spacing:3px; text-transform:uppercase;
+  margin-bottom:1.8rem;
+  animation:fadeUp 0.7s 0.3s ease forwards; opacity:0;
+}
+.hero-desc {
+  font-size:1.05rem; color:var(--white2);
+  line-height:1.85; max-width:540px; font-weight:300;
+  margin-bottom:3rem;
+  animation:fadeUp 0.7s 0.45s ease forwards; opacity:0;
+}
+.hero-ctas {
+  display:flex; gap:1.2rem; flex-wrap:wrap;
+  animation:fadeUp 0.7s 0.6s ease forwards; opacity:0;
+}
+.btn-gold {
+  background:var(--gold); color:var(--black);
+  padding:0.95rem 2.4rem; border:none; border-radius:2px;
+  font-family:'Outfit',sans-serif; font-size:0.82rem;
+  font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+  text-decoration:none; cursor:pointer;
+  transition:background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow:0 0 0 rgba(240,192,64,0);
+}
+.btn-gold:hover { background:var(--gold2); transform:translateY(-3px); box-shadow:0 8px 30px rgba(240,192,64,0.25); }
+.btn-ghost {
+  background:transparent; color:var(--white);
+  padding:0.95rem 2.4rem;
+  border:1px solid rgba(255,255,255,0.2); border-radius:2px;
+  font-family:'Outfit',sans-serif; font-size:0.82rem;
+  font-weight:400; letter-spacing:1.5px; text-transform:uppercase;
+  text-decoration:none;
+  transition:border-color 0.3s, color 0.3s;
+}
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+/* FLOATING STATS */
+.hero-stats {
+  position:absolute; right:5rem; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:3rem; z-index:1;
+  animation:fadeUp 0.7s 0.75s ease forwards; opacity:0;
+}
+.stat { text-align:center; }
+.stat-n {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem; font-weight:700; color:var(--gold); line-height:1;
+}
+.stat-l { font-size:0.65rem; color:var(--white3); letter-spacing:2px; text-transform:uppercase; margin-top:0.3rem; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* SECTIONS */
+section { padding:7rem 5rem; position:relative; z-index:1; }
+.sec-label { font-size:0.68rem; letter-spacing:3.5px; text-transform:uppercase; color:var(--cyan); margin-bottom:0.7rem; }
+.sec-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.2rem); font-weight:600;
+  line-height:1.15; margin-bottom:0.8rem;
+}
+.sec-line { width:50px; height:2px; background:var(--gold); margin-bottom:3.5rem; }
+
+/* ABOUT */
+.about { background:var(--black2); }
+.about-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:6rem; align-items:center; }
+.about-text p { color:var(--white2); line-height:1.9; font-size:0.97rem; margin-bottom:1.3rem; font-weight:300; }
+.about-text strong { color:var(--gold); font-weight:600; }
+.about-cards { display:flex; flex-direction:column; gap:1.2rem; }
+.about-card {
+  background:var(--black3);
+  border:1px solid var(--white4);
+  border-left:3px solid var(--gold);
+  padding:1.6rem 1.8rem;
+  transition:transform 0.3s, border-color 0.3s;
+}
+.about-card:hover { transform:translateX(6px); border-color:var(--gold); }
+.about-card h4 { font-size:0.9rem; font-weight:600; color:var(--gold); margin-bottom:0.4rem; letter-spacing:0.5px; }
+.about-card p { font-size:0.82rem; color:var(--white3); line-height:1.6; }
+
+/* SKILLS - ONE BY ONE */
+.skills { background:var(--black); }
+.skills-list { display:flex; flex-direction:column; gap:1.2rem; }
+.skill-row {
+  display:flex; align-items:center;
+  background:var(--black3);
+  border:1px solid var(--white4);
+  padding:1.8rem 2.2rem;
+  position:relative; overflow:hidden;
+  transition:transform 0.3s, border-color 0.3s;
+  cursor:default;
+  transform-style:preserve-3d;
+}
+.skill-row::before {
+  content:''; position:absolute; left:0; top:0;
+  width:3px; height:100%; background:var(--gold);
+  transform:scaleY(0); transform-origin:bottom;
+  transition:transform 0.3s;
+}
+.skill-row:hover::before { transform:scaleY(1); }
+.skill-row:hover {
+  border-color:rgba(240,192,64,0.3);
+  transform:perspective(800px) rotateX(1deg) translateY(-3px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(240,192,64,0.05);
+}
+.skill-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem; font-weight:700;
+  color:rgba(240,192,64,0.15);
+  width:60px; flex-shrink:0;
+}
+.skill-info { flex:1; }
+.skill-name { font-size:1rem; font-weight:600; color:var(--white); margin-bottom:0.3rem; }
+.skill-desc { font-size:0.8rem; color:var(--white3); line-height:1.5; }
+.skill-level {
+  display:flex; align-items:center; gap:0.4rem; flex-shrink:0;
+}
+.skill-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--gold); opacity:0.2;
+  transition:opacity 0.3s;
+}
+.skill-dot.active { opacity:1; }
+.skill-row:hover .skill-dot.active { background:var(--gold2); }
+
+/* EXPERIENCE */
+.experience { background:var(--black2); }
+.exp-list { display:flex; flex-direction:column; gap:0; }
+.exp-item {
+  display:grid; grid-template-columns:200px 1fr;
+  gap:3rem; padding:3rem 0;
+  border-bottom:1px solid var(--white4);
+  transition:background 0.3s;
+}
+.exp-item:last-child { border-bottom:none; }
+.exp-item:hover { background:rgba(240,192,64,0.02); }
+.exp-left { padding-top:0.3rem; }
+.exp-date { font-size:0.72rem; color:var(--gold); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:0.6rem; }
+.exp-company { font-size:0.82rem; color:var(--white3); font-style:italic; }
+.exp-right {}
+.exp-role {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem; font-weight:600; color:var(--white);
+  margin-bottom:0.8rem;
+}
+.exp-desc { font-size:0.88rem; color:var(--white2); line-height:1.85; font-weight:300; margin-bottom:1.2rem; }
+.tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+.tag {
+  font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;
+  padding:0.3rem 0.85rem; border-radius:2px;
+  background:rgba(240,192,64,0.08);
+  border:1px solid rgba(240,192,64,0.2);
+  color:var(--gold);
+}
+
+/* SERVICES - 3D CARDS */
+.services { background:var(--black); }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.srv-card {
+  background:var(--black3);
+  border:1px solid var(--white4);
+  padding:2.5rem 2rem;
+  position:relative; overflow:hidden;
+  transition:transform 0.4s, box-shadow 0.4s, border-color 0.3s;
+  transform-style:preserve-3d;
+  cursor:default;
+}
+.srv-card::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(240,192,64,0.05) 0%, transparent 60%);
+  opacity:0; transition:opacity 0.3s;
+}
+.srv-card:hover {
+  transform:perspective(1000px) rotateX(-3deg) rotateY(3deg) translateY(-8px);
+  box-shadow:0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(240,192,64,0.08);
+  border-color:rgba(240,192,64,0.35);
+}
+.srv-card:hover::after { opacity:1; }
+.srv-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.8rem; }
+.srv-icon {
+  width:48px; height:48px;
+  background:rgba(240,192,64,0.1);
+  border:1px solid rgba(240,192,64,0.2);
+  border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem;
+}
+.srv-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem; font-weight:700;
+  color:rgba(255,255,255,0.05);
+}
+.srv-card h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem; font-weight:600;
+  color:var(--white); margin-bottom:0.8rem;
+}
+.srv-card p { font-size:0.83rem; color:var(--white3); line-height:1.75; }
+
+/* CERTIFICATIONS */
+.certifications { background:var(--black2); }
+.cert-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.cert-card {
+  background:var(--black);
+  border:1px solid var(--white4);
+  border-top:2px solid var(--gold);
+  padding:2rem;
+  transition:transform 0.3s, box-shadow 0.3s;
+  transform-style:preserve-3d;
+}
+.cert-card:hover {
+  transform:perspective(800px) rotateX(3deg) translateY(-5px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+}
+.cert-emoji { font-size:2rem; margin-bottom:1rem; display:block; }
+.cert-card h4 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem; color:var(--white); margin-bottom:0.4rem;
+}
+.cert-card p { font-size:0.78rem; color:var(--white3); }
+
+/* CONTACT */
+.contact { background:var(--black); }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; }
+.contact-intro { color:var(--white2); font-size:1rem; line-height:1.85; font-weight:300; margin-bottom:2.5rem; }
+.contact-links { display:flex; flex-direction:column; gap:1rem; }
+.c-link {
+  display:flex; align-items:center; gap:1.2rem;
+  padding:1.2rem 1.5rem;
+  background:var(--black3);
+  border:1px solid var(--white4);
+  color:var(--white2); text-decoration:none;
+  font-size:0.88rem;
+  transition:border-color 0.3s, color 0.3s, transform 0.3s;
+}
+.c-link:hover { border-color:var(--gold); color:var(--gold); transform:translateX(6px); }
+.c-icon {
+  width:36px; height:36px; flex-shrink:0;
+  background:rgba(240,192,64,0.1);
+  border:1px solid rgba(240,192,64,0.15);
+  border-radius:2px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.9rem;
+}
+.avail-box {
+  background:var(--black3);
+  border:1px solid rgba(240,192,64,0.2);
+  padding:3rem;
+}
+.avail-box h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem; color:var(--white); margin-bottom:1rem;
+}
+.avail-box p { font-size:0.88rem; color:var(--white3); line-height:1.75; margin-bottom:2rem; }
+.avail-pill {
+  display:inline-flex; align-items:center; gap:0.6rem;
+  background:rgba(0,229,255,0.08);
+  border:1px solid rgba(0,229,255,0.25);
+  color:var(--cyan); font-size:0.72rem;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:0.6rem 1.4rem; border-radius:2px;
+  margin-bottom:2rem;
+}
+.avail-dot { width:6px; height:6px; background:#4caf50; border-radius:50%; animation:blink 2s infinite; }
+.services-list-mini { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+.services-list-mini li {
+  font-size:0.83rem; color:var(--white2);
+  display:flex; align-items:center; gap:0.7rem;
+}
+.services-list-mini li::before { content:'→'; color:var(--gold); }
+
+/* FOOTER */
+footer {
+  background:#000; padding:2rem 5rem;
+  display:flex; justify-content:space-between; align-items:center;
+  border-top:1px solid var(--white4);
+}
+footer p { font-size:0.75rem; color:var(--white3); }
+.footer-logo {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem; color:var(--gold); font-weight:700; letter-spacing:2px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  nav { padding:1rem 1.5rem; }
+  .nav-links { display:none; }
+  section { padding:4rem 1.5rem; }
+  .hero { padding:6rem 1.5rem 4rem; }
+  .hero-stats { display:none; }
+  .about-grid, .contact-grid { grid-template-columns:1fr; gap:3rem; }
+  .services-grid, .cert-grid { grid-template-columns:1fr; }
+  .exp-item { grid-template-columns:1fr; gap:0.5rem; }
+  footer { flex-direction:column; gap:0.5rem; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>Available for Freelance Projects</div>
+    <h1>Jyotsna<span class="name-gold">Khetpal</span></h1>
+    <div class="hero-title">Sr. SAM Consultant &nbsp;·&nbsp; Licensing Expert &nbsp;·&nbsp; ServiceNow Specialist</div>
+    <p class="hero-desc">6+ years of enterprise-grade Software Asset Management experience — helping organizations optimize software spend, stay audit-ready, and maximize license value across Microsoft, Adobe, VMware & more.</p>
+    <div class="hero-ctas">
+      <a href="#services" class="btn-gold">View My Services</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">6+</div><div class="stat-l">Years in SAM</div></div>
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">Companies</div></div>
+    <div class="stat"><div class="stat-n">2</div><div class="stat-l">Certifications</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="sec-label">About Me</div>
+      <h2 class="sec-title">IT Asset Management Professional</h2>
+      <div class="sec-line"></div>
+      <p>With over <strong>6 years of hands-on experience</strong> in Software Asset Management and IT Asset Management, I help enterprises acquire, implement, and manage their software assets with precision and compliance confidence.</p>
+      <p>I've delivered results at industry leaders — from <strong>HCL Tech (Google SAM Project)</strong> to <strong>EY India</strong> — running audits, building ServiceNow roadmaps, and creating effective licensing positions for publishers like Microsoft, VMware, Adobe, and SAP.</p>
+      <p>As a freelance SAM consultant, I bring this same enterprise expertise to your business — helping you reduce software costs, eliminate compliance risk, and prepare confidently for any audit.</p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <h4>🔍 License Compliance</h4>
+        <p>Microsoft, Adobe, VMware, SAP, Tableau — deep expertise ensuring your organization is always audit-ready.</p>
+      </div>
+      <div class="about-card">
+        <h4>🛠 SAM Tool Expert</h4>
+        <p>Snow License Manager, ServiceNow SAM Pro, Lansweeper, Code Insight — I know the platforms inside out.</p>
+      </div>
+      <div class="about-card">
+        <h4>💰 Cost Optimization</h4>
+        <p>License harvesting, true-up preparation, SaaS rationalization — saving organizations real money.</p>
+      </div>
+      <div class="about-card">
+        <h4>📋 Audits & Reviews</h4>
+        <p>Internal audits, deployment vs entitlement reviews, EULA interpretation, contract analysis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS - ONE BY ONE -->
+<section class="skills" id="skills">
+  <div class="sec-label">Expertise</div>
+  <h2 class="sec-title">Skills & Tools</h2>
+  <div class="sec-line"></div>
+  <div class="skills-list">
+
+    <div class="skill-row">
+      <div class="skill-num">01</div>
+      <div class="skill-info">
+        <div class="skill-name">Microsoft Licensing</div>
+        <div class="skill-desc">ELP True-up, EA, CSP, perpetual & SaaS models — deep expertise in MS licensing frameworks</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">02</div>
+      <div class="skill-info">
+        <div class="skill-name">Snow License Manager</div>
+        <div class="skill-desc">Customer license maintenance, SNOWBoards dashboards, compliance position management</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">03</div>
+      <div class="skill-info">
+        <div class="skill-name">ServiceNow SAM Pro</div>
+        <div class="skill-desc">Implementation roadmaps, publisher configuration (Microsoft, VMware), licensing reports</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">04</div>
+      <div class="skill-info">
+        <div class="skill-name">Adobe Licensing</div>
+        <div class="skill-desc">Creative Cloud compliance, VIP & ETLA agreements, entitlement management</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">05</div>
+      <div class="skill-info">
+        <div class="skill-name">VMware Licensing</div>
+        <div class="skill-desc">vSphere, vCenter compliance, audit preparation, deployment vs entitlement reviews</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">06</div>
+      <div class="skill-info">
+        <div class="skill-name">Tableau Licensing</div>
+        <div class="skill-desc">Subscription & perpetual compliance, user-based licensing management</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">07</div>
+      <div class="skill-info">
+        <div class="skill-name">SAP Licensing</div>
+        <div class="skill-desc">SAP audit support, user type classification, indirect access analysis</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">08</div>
+      <div class="skill-info">
+        <div class="skill-name">Lansweeper</div>
+        <div class="skill-desc">IT asset discovery, software inventory scanning, hardware asset tracking</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">09</div>
+      <div class="skill-info">
+        <div class="skill-name">Jira & Confluence</div>
+        <div class="skill-desc">Project tracking, documentation, process workflows for SAM team operations</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-num">10</div>
+      <div class="skill-info">
+        <div class="skill-name">Ariba & Oracle Procurement</div>
+        <div class="skill-desc">P2P process, RFQ/PO management, vendor management and procurement workflows</div>
+      </div>
+      <div class="skill-level">
+        <div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot active"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="sec-label">Career History</div>
+  <h2 class="sec-title">Work Experience</h2>
+  <div class="sec-line"></div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-date">Feb 2024 — Present</div>
+        <div class="exp-company">EY India, Gurugram</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Sr. Consultant — SAM</div>
+        <p class="exp-desc">Leading SAM consulting engagements for enterprise clients. Analyzing software spending, performing internal audits of SAP, Microsoft and VMware, and building ServiceNow implementation roadmaps tailored to major publishers. Creating effective licensing positions through deep data inventory and contract analysis.</p>
+        <div class="tags">
+          <span class="tag">ServiceNow</span><span class="tag">Microsoft</span><span class="tag">VMware</span><span class="tag">SAP</span><span class="tag">Audit</span><span class="tag">Consulting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-date">Jun 2023 — Jan 2024</div>
+        <div class="exp-company">Getronics, Gurugram</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">SAM Specialist</div>
+        <p class="exp-desc">Maintained customer license and entitlement information in Snow License Manager. Managed compliance positions for Microsoft, Adobe, VMware and Tableau. Built customer-specific SNOWBoards dashboards, acted on license alerts, and prepared detailed SAM reports for clients.</p>
+        <div class="tags">
+          <span class="tag">Snow License Manager</span><span class="tag">Adobe</span><span class="tag">Tableau</span><span class="tag">Compliance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-date">Nov 2021 — Jun 2023</div>
+        <div class="exp-company">Hyland Software Solutions</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Asset Management Sr. Analyst</div>
+        <p class="exp-desc">Managed full software asset lifecycle from acquisition to renewal. Led Microsoft True-up process, performed Software Composition Analysis (SCA), forecasted yearly IT budgets, and interpreted contract terms and SLAs for major publishers across the organization.</p>
+        <div class="tags">
+          <span class="tag">Microsoft True-Up</span><span class="tag">SCA</span><span class="tag">Budget Forecasting</span><span class="tag">Lifecycle</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-date">May 2019 — Nov 2021</div>
+        <div class="exp-company">HCL Tech — Google SAM Project</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Sr. Analyst — SAM</div>
+        <p class="exp-desc">Single point of contact for major software renewals including JetBrains, MathWorks, and Lucidchart. Led the Google Inventory Automation Project: Fairburn. Drove significant soft savings through license harvesting and duplicate account analysis. Authored SOPs and conducted new hire training sessions.</p>
+        <div class="tags">
+          <span class="tag">Google SAM</span><span class="tag">Procurement</span><span class="tag">License Harvesting</span><span class="tag">EULA</span><span class="tag">Training</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="sec-label">What I Offer</div>
+  <h2 class="sec-title">Freelance Services</h2>
+  <div class="sec-line"></div>
+  <div class="services-grid">
+    <div class="srv-card">
+      <div class="srv-top"><div class="srv-icon">🔍</div><div class="srv-num">01</div></div>
+      <h3>Software License Audit</h3>
+      <p>End-to-end internal audits identifying compliance gaps, over-licensing, and cost-saving opportunities across Microsoft, Adobe, VMware & more.</p>
+    </div>
+    <div class="srv-card">
+      <div class="srv-top"><div class="srv-icon">⚙️</div><div class="srv-num">02</div></div>
+      <h3>SAM Tool Implementation</h3>
+      <p>Setup and configuration of Snow License Manager or ServiceNow SAM Pro — from onboarding publishers to building automated dashboards.</p>
+    </div>
+    <div class="srv-card">
+      <div class="srv-top"><div class="srv-icon">📜</div><div class="srv-num">03</div></div>
+      <h3>License Compliance Consulting</h3>
+      <p>Review and interpretation of EULA, contract terms, and SLA agreements. Build an effective licensing position that stands up to any audit.</p>
+    </div>
+    <div class="srv-card">
+      <div class="srv-top"><div class="srv-icon">📊</div><div class="srv-num">04</div></div>
+      <h3>True-Up & Renewal Support</h3>
+      <p>Preparation and management of Microsoft ELP True-up and software renewal cycles — ensuring no surprises and maximum negotiation leverage.</p>
+    </div>
+    <div class="srv-card">
+      <div class="srv-top"><div class="srv-icon">💹</div><div class="srv-num">05</div></div>
+      <h3>IT Budget Forecasting</h3>
+      <p>Structured software spend data for annual IT budgeting with actionable recommendations for cost optimization and vendor rationalization.</p>
+    </div>
+    <div class="srv-card">
+      <div class="srv-top"><div class="srv-icon">📋</div><div class="srv-num">06</div></div>
+      <h3>SAM Process Documentation</h3>
+      <p>Creation of SOPs, process documentation, and training materials for your internal SAM team — built from enterprise-grade experience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certifications" id="certifications">
+  <div class="sec-label">Credentials</div>
+  <h2 class="sec-title">Certifications & Education</h2>
+  <div class="sec-line"></div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <span class="cert-emoji">🏆</span>
+      <h4>CSAM — Certified SAM Professional</h4>
+      <p>Issued August 2024 · Software Asset Management certification</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-emoji">📋</span>
+      <h4>ITIL 4 Foundation Certificate</h4>
+      <p>IT Service Management Framework · Best practices in IT service delivery</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-emoji">🎓</span>
+      <h4>B.Tech — Biotechnology</h4>
+      <p>Noida Institute of Engineering & Technology · Graduated 2016</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="sec-label">Let's Work Together</div>
+  <h2 class="sec-title">Get in Touch</h2>
+  <div class="sec-line"></div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">Looking for an experienced SAM consultant to audit your software estate, implement a SAM tool, or help you prepare for a vendor audit? I'd love to help — reach out through any of the channels below.</p>
+      <div class="contact-links">
+        <a href="mailto:jkhetpal27@gmail.com" class="c-link">
+          <div class="c-icon">✉</div> jkhetpal27@gmail.com
+        </a>
+        <a href="tel:+919599217964" class="c-link">
+          <div class="c-icon">📞</div> +91 9599217964
+        </a>
+        <a href="https://www.linkedin.com/in/jyotsna-khetpal-96a530a0/" target="_blank" class="c-link">
+          <div class="c-icon">in</div> linkedin.com/in/jyotsna-khetpal
+        </a>
+        <div class="c-link">
+          <div class="c-icon">📍</div> Etawah, India — Open to Remote Work Globally
+        </div>
+      </div>
+    </div>
+    <div class="avail-box">
+      <div class="avail-pill"><span class="avail-dot"></span>Currently Available</div>
+      <h3>Open for New Projects</h3>
+      <p>Available for freelance SAM consulting — short-term audits, tool implementations, compliance reviews, or ongoing advisory. Fully remote-capable with flexible scheduling.</p>
+      <ul class="services-list-mini">
+        <li>Software license audits</li>
+        <li>SAM tool setup & configuration</li>
+        <li>Compliance & EULA reviews</li>
+        <li>True-up & renewal support</li>
+        <li>IT budget planning</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Jyotsna Khetpal · SAM Consultant · All rights reserved.</p>
+  <div class="footer-logo">JK</div>
+</footer>
+
+</body>
+</html>
